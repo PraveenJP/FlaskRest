@@ -5,3 +5,4 @@ Flask Rest framework, It's just a proactice set.
 * Flask
 * PostgreSQL
 * SQLAlchemy
+* MVC based file Structure
