@@ -1,3 +1,7 @@
+"""
+    Details: User Models
+    Author: praveenjp
+"""
 from app import db, ma
 from sqlalchemy.dialects.postgresql import JSON
 
@@ -18,13 +22,16 @@ class Result(db.Model):
     def __repr__(self):
         return '<id {}>'.format(self.id)
 
+
 class ResultSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ('url', 'result_all', 'result_no_stop_words')
 
+
 result_schema = ResultSchema()
 results_schema = ResultSchema(many=True)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -40,6 +47,7 @@ class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
         fields = ('username', 'email')
+
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)

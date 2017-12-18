@@ -1,14 +1,26 @@
+"""
+    Details: User Controller
+    Author: praveenjp
+"""
 from flask import request, jsonify
 from app.user.models import User, users_schema, user_schema
 from app import app, db
 
+
 @app.route('/')
 def get_tasks():
+    """
+    :return: Sample Test
+    """
     return jsonify('Flask Restful API')
 
-# endpoint to create new user
+
 @app.route('/user', methods=["POST"])
 def add_user():
+    """
+    :param: Username and email
+    :return: Success or failer based on insert data
+    """
     username = request.json['username']
     email = request.json['email']
     new_user = User(username, email)
@@ -19,22 +31,33 @@ def add_user():
     except Exception as e:
         return jsonify(e)
 
-# endpoint to show all users
+
 @app.route('/user', methods=["GET"])
 def get_user():
+    """
+    :return: Get all the user data
+    """
     all_users = User.query.all()
     result = users_schema.dump(all_users)
     return jsonify(result.data)
 
-# endpoint to get user detail by id
+
 @app.route('/user/<id>', methods=["GET"])
 def user_detail(id):
+    """
+    :param id: User ID
+    :return: User data
+    """
     user = User.query.get(id)
     return user_schema.jsonify(user)
 
-# endpoint to update user
+
 @app.route('/user/<id>', methods=["PUT"])
 def user_update(id):
+    """
+    :param id: User ID
+    :return: Updated user result
+    """
     user = User.query.get(id)
     username = request.json['username']
     email = request.json['email']
@@ -43,9 +66,13 @@ def user_update(id):
     db.session.commit()
     return user_schema.jsonify(user)
 
-# endpoint to delete user
+
 @app.route('/user/<id>', methods=["DELETE"])
 def user_delete(id):
+    """
+    :param id: User ID
+    :return: Deleted user Result
+    """
     user = User.query.get(id)
     db.session.delete(user)
     db.session.commit()
