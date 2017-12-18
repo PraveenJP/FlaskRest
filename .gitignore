@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+migrations/*
+__pycache__/*
+app/__pycache__/*
+app/user/__pycache__/*
